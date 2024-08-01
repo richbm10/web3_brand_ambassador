@@ -1,0 +1,16 @@
+{
+    "description": "Friendly reminder that Saprissa is the Best Club in Costa Rica!", 
+    "external_url": "https://mafi.cr/saprissa/3", 
+    "image": "https://ipfs.io/ipfs/QmcMXvEwGBtnwuedDvyjLP8gNbGjfT2eurK1MuyhDo6E9Y", 
+    "name": "Saprissa Centeno Limited Edition Shirt",
+    "attributes": [ 
+        {
+          "trait_type": "Hierarchy", 
+          "value": "Costa Rica Historically Best Club"
+        }, 
+        {
+          "trait_type": "Season", 
+          "value": "2003-2004"
+        }
+     ]
+  }
