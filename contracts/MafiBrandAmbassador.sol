@@ -23,9 +23,20 @@ contract MafiBrandAmbassador is Ownable {
     event Purchase(
         address indexed buyer,
         uint256 indexed tokenId,
-        address indexed affiliate,
+        uint256 value,
         uint256 amount
     );
+
+    event Attribution(
+        address indexed affiliate,
+        uint256 indexed tokenId,
+        uint256 value,
+        uint256 amount
+    );
+
+    event AddedMafiAffiliate(address indexed affiliate);
+
+    event RemovedMafiAffiliate(address indexed affiliate);
 
     constructor(
         address _initialOwner,
@@ -36,26 +47,40 @@ contract MafiBrandAmbassador is Ownable {
         price = _price;
     }
 
-    modifier onlyAffiliate() {
-        require(affiliates[msg.sender], "Caller is not an affiliate");
+    modifier onlyClient() {
+        require(
+            affiliates[msg.sender] == false,
+            "Caller can not be a Mafi affiliate!"
+        );
+        require(msg.sender != owner(), "Caller can not be the contract owner!");
         _;
     }
 
     function addAffiliate(address affiliate) external onlyOwner {
         affiliates[affiliate] = true;
+
+        emit AddedMafiAffiliate(affiliate);
     }
 
     function removeAffiliate(address affiliate) external onlyOwner {
         affiliates[affiliate] = false;
+
+        emit RemovedMafiAffiliate(affiliate);
     }
 
     function purchase(
         address affiliate,
         uint256 tokenId,
         uint256 amount
-    ) external payable {
-        require(affiliates[affiliate], "Affiliate not recognized");
+    ) external payable onlyClient {
         require(msg.value >= price, "Insufficient payment");
+
+        if (affiliate != address(0)) {
+            require(
+                affiliates[affiliate] == true,
+                "The Affiliate is not a Brand Ambassador of this Campaign!"
+            );
+        }
 
         // Transfer the corresponding NFT from SaprissaCentenoCollection to the buyer
         ISaprissaCentenoCollection(saprissaCentenoCollection).safeTransferFrom(
@@ -66,10 +91,15 @@ contract MafiBrandAmbassador is Ownable {
             ""
         );
 
-        // Attribute the token to the affiliate
-        attribution[affiliate][tokenId] = attribution[affiliate][tokenId] + 1;
+        emit Purchase(msg.sender, tokenId, msg.value, amount);
 
-        emit Purchase(msg.sender, tokenId, affiliate, msg.value);
+        if (affiliate == address(0)) {
+            return;
+        }
+
+        // Attribute the token to the affiliate
+        attribution[affiliate][tokenId] = attribution[affiliate][tokenId] + amount;
+        emit Attribution(affiliate, tokenId, msg.value, amount);
     }
 
     function withdraw() external onlyOwner {

@@ -5,7 +5,7 @@ const MafiBrandAmbassadorModule = buildModule(
   (m) => {
     const mafiBrandAmbassadorModule = m.contract(
       "MafiBrandAmbassador",
-      ["0x9E17D83De550DFD4585632E725fD92E72b9C3f4a", "0x4DC1E9c38E0D80960A45a16D2783D61c3E2c6550", 10000000000000]
+      ["0x9E17D83De550DFD4585632E725fD92E72b9C3f4a", "0xC688AFb094F257A58e50d52d52BABC8d08Efc17e", 10000000000000]
     );
 
     return { mafiBrandAmbassadorModule };
