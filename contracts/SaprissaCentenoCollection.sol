@@ -15,17 +15,16 @@ contract SaprissaCentenoCollection is
     ERC1155Burnable,
     ERC1155Supply
 {
-    uint256 public constant MAX_SUPPLY = 150;
-
     constructor(
-        address initialOwner
+        address initialOwner,
+        uint256 supply
     )
         ERC1155(
             "https://ipfs.io/ipfs/QmXnoLSNsTYutkqC6JwoZ7HojyutfKwPMtndtsejYWMBwm"
         )
         Ownable(initialOwner)
     {
-        mint(initialOwner, 1, MAX_SUPPLY, "");
+        mint(initialOwner, 1, supply, "");
     }
 
     function setURI(string memory newuri) public onlyOwner {
