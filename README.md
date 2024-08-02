@@ -1,6 +1,12 @@
-Mafi
+MAFI - Introducing the Web3 Brand Ambassador
 
-Project Mafi aim's to enable decentralized marketing for business who want to leverage brand ambassadors that can achieve a better engagement with audiences spread across the world.
+Description:
+MAFI is a project developed for the Optimism University Module.
+It deals with a system where any company that wishes to promote through brand ambassadors could do so under our brand, the company makes unique collections by medium of imbalanced networks, so that they can make the purchase of the mercaded product, making a win to win for the company and the ambassador.
+This is done through intelligent contracts.
+
+Video explanation:
+https://www.youtube.com/watch?v=BrHR9xDJc1o
 
 # Sample Hardhat Project
 
